@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Beehive - האזור האישי שלך</title>
+	<meta name="viewport"
+	      content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="author" content="Ido Aizenshtein">
+	<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+	      rel="stylesheet">
+	
+	<!-- 	<link rel="stylesheet" href="style/animate.css"> -->
+	
+	<!-- 	<link rel="stylesheet/less" type="text/css" href="style/styles.less"/> -->
+	<!-- 	<link rel="stylesheet/less" type="text/css" href="style/mobile.less"/> -->
+	
+	<!-- 	<link rel="stylesheet" href="/style/styles.css"> -->
+	<!-- 	<link rel="stylesheet" href="/style/mobile.css"> -->
+	
+	<!-- styles specific to individual pages -->
+	<% if (typeof styles !== 'undefined') { %>
+	<% if (styles.length > 0) { %>
+	<% for (let style of styles) { %>
+	<link rel="stylesheet" href="/style/<%= style %>.css">
+	<% } %>
+	<% } %>
+	<% } %>
+</head>
+<body>
+<div class="body">
+	<%- include('header.html') -%>
+	<%- include('nav-mobile.html') -%>
+	
+	<!-- Main -->
+	<main id="account-details">
+		<ul class="nav-links-titles">
+			<li class="link">
+				<a href="/">
+					עמוד הבית
+				</a>
+				<span>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icons">
+<path id="Vector 6" d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#666666" stroke-width="1.23077" stroke-linecap="round"
+      stroke-linejoin="round"/>
+</g>
+</svg>
+</span>
+			</li>
+			<li>
+				<p>איזור אישי</p>
+			</li>
+		</ul>
+		
+		<% if (user.userType === "customer") { %>
+		<section class="account-details account-details-tabs">
+			<div class="username-info">
+				<p>
+					היי,
+					<strong>
+						<%= username %>
+						
+						<% if (user.userType === "accountant") { %>
+						,
+						רו״ח
+						<% } %>
+					</strong>
+				</p>
+				
+				<a href="/personal-details" class="link-no-decoration">
+					<button>
+					<span>
+											עדכון פרטים
+					</span>
+					</button>
+				</a>
+			</div>
+			<h1>
+				האיזור האישי שלך
+			</h1>
+			<div class="companies-select">
+				<ul class="list-items">
+					<% companies.forEach( function(company) { %>
+					<li>
+						<a href="#<%- company.id %>">
+							<p>
+								<%- company.companyName %> מספר <%- company.companyHP %>
+							</p>
+						</a>
+					</li>
+					<% }) %>
+				</ul>
+			</div>
+			
+			
+			<% companies.forEach( function(company) { %>
+			<div id="<%- company.id %>">
+				<ul class="titles">
+					<li>
+						<p>
+							צפי התשלום הבא
+						</p>
+						<h2>
+							<span><%- company.titles.price.toLocaleString('en-US') %></span><small>₪</small>
+						</h2>
+						
+						<% if (company.titles.nextBillingDate) { %>
+						<div class="next-billing-date">
+							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+							     fill="none">
+								<path d="M11 5.43935H5.00004C4.7239 5.43935 4.50004 5.66321 4.50004 5.93935C4.50004 6.21549 4.7239 6.43935 5.00004 6.43935H11C11.2762 6.43935 11.5 6.21549 11.5 5.93935C11.5 5.66321 11.2762 5.43935 11 5.43935Z"
+								      fill="#949494"/>
+								<path fill-rule="evenodd" clip-rule="evenodd"
+								      d="M11.26 2.37935H11.3334C13.1743 2.37935 14.6667 3.87173 14.6667 5.71268V11.7127C14.6667 13.5536 13.1743 15.046 11.3334 15.046H4.66671C3.78265 15.046 2.93481 14.6948 2.30968 14.0697C1.68456 13.4446 1.33337 12.5967 1.33337 11.7127V5.71268C1.33337 3.87173 2.82576 2.37935 4.66671 2.37935H4.72671V1.16602C4.72671 0.889873 4.95057 0.666016 5.22671 0.666016C5.50285 0.666016 5.72671 0.889873 5.72671 1.16602V2.37935H10.26V1.16602C10.26 0.889873 10.4839 0.666016 10.76 0.666016C11.0362 0.666016 11.26 0.889873 11.26 1.16602V2.37935ZM11.3334 14.046C12.622 14.046 13.6667 13.0013 13.6667 11.7127V5.71268C13.6667 4.42402 12.622 3.37935 11.3334 3.37935H4.66671C3.37804 3.37935 2.33337 4.42402 2.33337 5.71268V11.7127C2.33337 13.0013 3.37804 14.046 4.66671 14.046H11.3334Z"
+								      fill="#949494"/>
+							</svg>
+							<span>
+								<%- new Date(company.titles.nextBillingDate).toLocaleString('he-IL', {year: "2-digit", month: "2-digit", day: "2-digit"}) %>
+							</span>
+						</div>
+						<% } %>
+					</li>
+					
+					<li>
+						<p>
+							מוצרים פעילים
+						</p>
+						<h2>
+							<%- company.titles.statusActive %>
+						</h2>
+					</li>
+					
+					<li>
+						<p>
+							מוצרים בתהליך
+						</p>
+						<h2>
+							<%- company.titles.statusLead %>
+						</h2>
+					</li>
+				</ul>
+				<% if (company.userProducts && company.userProducts.length) { %>
+				<div class="table">
+					<div class="header-row">
+						<div>
+							מוצר
+						</div>
+						<div>
+							שם לקוח
+						</div>
+						<div class="show-mobile flex-new-row"></div>
+						<div>
+							סטטוס
+						</div>
+						<div>
+							סכום מוצר
+						</div>
+						<div class="show-mobile flex-new-row"></div>
+						<div>
+							&nbsp;
+						</div>
+					</div>
+					<div class="body-table">
+						<% company.userProducts.forEach( function(product) { %>
+						<div class="body-row">
+							<div>
+								<small class="show-mobile">
+									מוצר
+								</small>
+								<%- product.title %>
+							</div>
+							<div>
+								<small class="show-mobile">
+									שם לקוח
+								</small>
+								<%- company.companyName %>
+							</div>
+							<div class="show-mobile flex-new-row"></div>
+							<div>
+								<small class="show-mobile">
+									סטטוס
+								</small>
+								<span class="status <%- product.status %>">
+									<%- data.status[product.status] %>
+								</span>
+							</div>
+							<div>
+								<small class="show-mobile">
+									סכום מוצר
+								</small>
+								<span class="sum-price"><%- product.price.toLocaleString('en-US') %></span><span
+									class="sum-price">₪</span>
+							</div>
+							<div class="show-mobile flex-new-row"></div>
+							<div>
+								<button class="open-bottom-nav">
+									<svg xmlns="http://www.w3.org/2000/svg" width="4" height="16" viewBox="0 0 4 16"
+									     fill="none">
+										<circle cx="2" cy="2" r="2" fill="#6C7981"/>
+										<circle cx="2" cy="8" r="2" fill="#6C7981"/>
+										<circle cx="2" cy="14" r="2" fill="#6C7981"/>
+									</svg>
+								</button>
+								<div class="nav-popup">
+									<svg xmlns="http://www.w3.org/2000/svg" width="161" height="15" viewBox="0 0 161 15"
+									     fill="none">
+										<path d="M32.5 0L42.4593 14.25H22.5407L32.5 0Z" fill="white"/>
+									</svg>
+									<ul>
+										<li onclick="openServiceCallModal(<%= JSON.stringify(product) %>)">
+											פתח קריאת שירות
+										</li>
+										<% if (product.status !== "disconnect") { %>
+										<li onclick="openDisconnectModal(<%= JSON.stringify(product) %>)">
+											התנתק מהמוצר
+										</li>
+										<% } %>
+									</ul>
+								</div>
+							
+							</div>
+						</div>
+						<% }) %>
+					</div>
+				
+				</div>
+				<% } %>
+			
+			</div>
+			<% }) %>
+			
+			
+			<!-- 			User: -->
+			<!-- 			<div> -->
+			<!-- 				<%- JSON.stringify(user) %> -->
+			<!-- 			</div> -->
+			<!-- 			 -->
+			<!-- 			Companies: -->
+			<!-- 			<div> -->
+			<!-- 				<%- JSON.stringify(companies) %> -->
+			<!-- 			</div> -->
+		</section>
+		<% } %>
+		
+		<% if (user.userType === "accountant") { %>
+		<section class="account-details account-details-accountant">
+			<div class="username-info">
+				<p>
+					היי,
+					<strong>
+						<%= username %>
+						
+						,
+						רו״ח
+					</strong>
+				</p>
+				<a href="/personal-details" class="link-no-decoration">
+					<button>
+					<span>
+											עדכון פרטים
+					</span>
+					</button>
+				</a>
+			</div>
+			<h1>
+				האיזור האישי שלך
+			</h1>
+			
+			
+			<div>
+				<ul class="titles">
+					<li>
+						<p>
+							צפי התשלום הבא
+						</p>
+						<h2>
+							<span><%- accountantData.titles.accCommission.toLocaleString('en-US') %></span><small>₪</small>
+						</h2>
+					</li>
+					
+					<li>
+						<p>
+							מוצרים פעילים
+						</p>
+						<h2>
+							<%- accountantData.titles.statusActive %>
+						</h2>
+					</li>
+					
+					<li>
+						<p>
+							מוצרים בתהליך
+						</p>
+						<h2>
+							<%- accountantData.titles.statusLead %>
+						</h2>
+					</li>
+				</ul>
+				<% if (accountantData.userProducts && accountantData.userProducts.length) { %>
+				<div class="table">
+					<div class="header-row">
+						<div>
+							מוצר
+						</div>
+						<div>
+							שם לקוח
+						</div>
+						<div class="show-mobile flex-new-row"></div>
+						<div>
+							סטטוס
+						</div>
+						<div>
+							תאריך חידוש
+						</div>
+						<div class="show-mobile flex-new-row"></div>
+						<div>
+							סכום מוצר
+						</div>
+						<div>
+							עמלה
+						</div>
+					</div>
+					<div class="body-table">
+						<% accountantData.userProducts.forEach( function(product) { %>
+						<div class="body-row">
+							<div>
+								<small class="show-mobile">
+									מוצר
+								</small>
+								<%- product.title %>
+							</div>
+							<div>
+								<small class="show-mobile">
+									שם לקוח
+								</small>
+								<%- product.companyName %>
+							</div>
+							<div class="show-mobile flex-new-row"></div>
+							<div>
+								<small class="show-mobile">
+									סטטוס
+								</small>
+								<span class="status <%- product.status %>">
+									<%- data.status[product.status] %>
+								</span>
+							</div>
+							<div>
+								<small class="show-mobile">
+									תאריך חידוש
+								</small>
+								<span>
+									<%- product.nextBillingDate ? new Date(product.nextBillingDate).toLocaleString('he-IL', {year: "2-digit", month: "2-digit", day: "2-digit"}) : '' %>
+								</span>
+							</div>
+							<div class="show-mobile flex-new-row"></div>
+							<div>
+								<small class="show-mobile">
+									סכום מוצר
+								</small>
+								<span class="sum-price"><%- product.price.toLocaleString('en-US') %></span><span
+									class="sum-price">₪</span>
+							</div>
+							<div>
+								<small class="show-mobile">
+									עמלה
+								</small>
+								<span class="sum-price"><%- product.accCommission.toLocaleString('en-US') %></span><span
+									class="sum-price">₪</span>
+							</div>
+						</div>
+						<% }) %>
+					</div>
+				
+				</div>
+				<% } %>
+			
+			</div>
+		
+		</section>
+		<% } %>
+	</main>
+	
+	<%- include('footer.html') -%>
+	<%- include('dropdown.html') -%>
+	<%- include('loader.html') -%>
+	<%- include('popup-video.html') -%>
+	
+	<div class="popup-select-company account-details-popup">
+		<div class="bg-popup"></div>
+		<div class="content">
+			<div class="flex-data">
+				<div class="close-popup">
+					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+						<path d="M1.5 1.76367L15.5 16.2622" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+						<path d="M15.5 1.76367L1.5 16.2622" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+					</svg>
+				</div>
+				<img src="/assets/images/disconnect.png" alt="disconnect" id="disconnect">
+				
+				<h1 id="textarea-title">
+				
+				</h1>
+				<label for="textarea-review">
+					<span class="product-name"></span>
+				</label>
+				<textarea id="textarea-review" name="textarea-review" rows="10" cols="50"
+				          placeholder="פירוט"></textarea>
+				
+				<div class="btn">
+					<button onclick="setStatusUserProduct()" id="setCompany">
+						<span>
+					אישור
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- Jquery lib -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"
+        integrity="sha256-sw0iNNXmOJbQhYFuC9OF2kOlD5KQKe1y5lfBn4C9Sjg=" crossorigin="anonymous"></script>
+
+<!-- less lib -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/less"></script> -->
+
+<!-- <script src="/scripts/owl.carousel.min.js"></script> -->
+<!-- <script src="/scripts/categories-items.js"></script> -->
+
+<!-- page specific scripts -->
+<% if (typeof libs !== 'undefined') { %>
+<% for (let lib of libs) { %>
+<script src='/scripts/<%= lib %>.js'></script>
+<% } %>
+<% } %>
+</body>
+</html>

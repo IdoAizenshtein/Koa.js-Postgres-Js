@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Beehive - עדכון פרטים אישיים</title>
+	<meta name="viewport"
+	      content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="author" content="Ido Aizenshtein">
+	<link rel="icon" type="image/svg+xml" href="/assets/images/favicon.svg">
+	<link rel="icon" type="image/png" href="/assets/images/favicon.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+	      rel="stylesheet">
+	
+	<!-- 	<link rel="stylesheet" href="style/animate.css"> -->
+	
+	<!-- 	<link rel="stylesheet/less" type="text/css" href="style/styles.less"/> -->
+	<!-- 	<link rel="stylesheet/less" type="text/css" href="style/mobile.less"/> -->
+	
+	<!-- 	<link rel="stylesheet" href="/style/styles.css"> -->
+	<!-- 	<link rel="stylesheet" href="/style/mobile.css"> -->
+	
+	<!-- styles specific to individual pages -->
+	<% if (typeof styles !== 'undefined') { %>
+	<% if (styles.length > 0) { %>
+	<% for (let style of styles) { %>
+	<link rel="stylesheet" href="/style/<%= style %>.css">
+	<% } %>
+	<% } %>
+	<% } %>
+</head>
+<body>
+<div class="body">
+	<%- include('header.html') -%>
+	<%- include('nav-mobile.html') -%>
+	
+	<!-- Main -->
+	<main id="account-details">
+		<ul class="nav-links-titles">
+			<li class="link">
+				<a href="/">
+					עמוד הבית
+				</a>
+				<span>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icons">
+<path id="Vector 6" d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#666666" stroke-width="1.23077" stroke-linecap="round"
+      stroke-linejoin="round"/>
+</g>
+</svg>
+</span>
+			</li>
+			<li class="link">
+				<a href="/account-details">
+					איזור אישי
+				</a>
+				<span>
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Icons">
+<path id="Vector 6" d="M10.5 13.5L5.5 8.5L10.5 3.5" stroke="#666666" stroke-width="1.23077" stroke-linecap="round"
+      stroke-linejoin="round"/>
+</g>
+</svg>
+    </span>
+			</li>
+			<li>
+				<p>
+					עדכון פרטים
+				</p>
+			</li>
+		</ul>
+		<input type="text" value="<%- user.userType %>" id="userType" style="display: none">
+		
+		<% if (user.userType === "customer") { %>
+		<section class="personal-details account-details account-details-tabs">
+			<h1>
+				<a href="/account-details">
+					<button>
+						<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"
+						     fill="none">
+							<g filter="url(#filter0_d_203_19937)">
+								<circle cx="50" cy="49" r="32" fill="white"/>
+							</g>
+							<path d="M42 34L59 49L42 64" stroke="#77C2CC" stroke-width="3" stroke-linecap="round"
+							      stroke-linejoin="round"/>
+							<defs>
+								<filter id="filter0_d_203_19937" x="0" y="0" width="100" height="100"
+								        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+									<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+									<feColorMatrix in="SourceAlpha" type="matrix"
+									               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+									               result="hardAlpha"/>
+									<feOffset dy="1"/>
+									<feGaussianBlur stdDeviation="9"/>
+									<feComposite in2="hardAlpha" operator="out"/>
+									<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+									<feBlend mode="normal" in2="BackgroundImageFix"
+									         result="effect1_dropShadow_203_19937"/>
+									<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_203_19937"
+									         result="shape"/>
+								</filter>
+							</defs>
+						</svg>
+					</button>
+				</a>
+				
+				עדכון פרטים אישיים
+			</h1>
+			<div class="companies-select">
+				<ul class="list-items">
+					<% companies.forEach( function(company) { %>
+					<li>
+						<a href="#<%- company.id %>">
+							<p>
+								<%- company.companyName %> מספר <%- company.companyHP %>
+							</p>
+						</a>
+					</li>
+					<% }) %>
+				</ul>
+			</div>
+			
+			
+			<% companies.forEach( function(company) { %>
+			<div id="<%- company.id %>">
+				<div class="personal-details-form">
+					<ul class="personal-details-form-images">
+						<li>
+							<form action="/upload" method="POST" enctype="multipart/form-data"
+							      class="form_upload"
+							      id="mainPicture_form_<%- company.id %>">
+								<label for="mainPicture_<%- company.id %>">
+									<img src="/assets/images/loader.gif" alt="loader" class="loader_upload"/>
+									
+									<% if (company.mainPicture) { %>
+									<img src="<%= company.mainPicture %>" alt="mainPicture" id="mainPicture_img_<%- company.id %>"
+									     class="picture_img">
+									<% } %>
+									<% if (!company.mainPicture) { %>
+									<span>
+							<img src="/assets/images/main-picture-base.png" alt="mainPicture">
+						</span>
+									<% } %>
+								</label>
+								
+								<input type="file" id="mainPicture_<%- company.id %>"
+								       class="inputfile mainPicture_customer"
+								       name="mainPicture_<%- company.id %>"
+								       accept="image/png, image/jpeg">
+							</form>
+						
+						</li>
+					</ul>
+				</div>
+				
+				<div class="personal-details-form-fields">
+					<div class="right-form-field">
+						<h2>
+							פרטים אישיים
+						</h2>
+						<div class="form-field-wrapper">
+							<div class="form-field-input">
+								<label for="firstName_<%- company.id %>">
+									שם פרטי
+								</label>
+								<form autocomplete="off">
+									<input required type="text" id="firstName_<%- company.id %>" value="<%= company.firstName %>">
+								</form>
+							</div>
+							<div class="form-field-input">
+								<label for="lastName_<%- company.id %>">
+									שם משפחה
+								</label>
+								<form autocomplete="off">
+									<input required type="text" id="lastName_<%- company.id %>" value="<%= company.lastName %>">
+								</form>
+							</div>
+						</div>
+						<div class="form-field-wrapper">
+							<div class="form-field-input">
+								<label for="mobile_<%- company.id %>">
+									נייד
+								</label>
+								<input type="tel" id="mobile_<%- company.id %>" value="0<%= company.mobile %>" disabled>
+							</div>
+							<div class="form-field-input">
+								<label for="mail_<%- company.id %>">
+									אימייל
+								</label>
+								<form autocomplete="off">
+									<input required type="email" id="mail_<%- company.id %>" value="<%= company.mail %>">
+								</form>
+							</div>
+						</div>
+						<div class="form-field-wrapper">
+							<div class="form-field-input">
+								<label for="address_<%- company.id %>">
+									רחוב ומספר בית
+								</label>
+								<form autocomplete="off">
+									<input required type="text" id="address_<%- company.id %>" value="<%= company.address %>">
+								</form>
+							</div>
+							<div class="form-field-input">
+								<label for="city_dropdown_<%- company.id %>">
+									עיר/יישוב
+								</label>
+								<div class="search-dropdown">
+									<div class="dropdown-arrow">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+											<path d="M13 6L8 11L3 6" stroke="#666666" stroke-width="1.23077" stroke-linecap="round"
+											      stroke-linejoin="round"/>
+										</svg>
+									</div>
+									<input type="text" id="city_dropdown_<%- company.id %>"
+									       value="<%= company.city ? company.city : '' %>">
+									<div class="dropdown-display"
+									     id="dropdownDisplayCity_<%- company.id %>"><%= company.city ? company.city : 'בחר עיר/יישוב' %>
+									</div>
+									<div class="dropdown-content"
+									     id="dropdownContentCity_<%- company.id %>">
+										<input type="text"
+										       class="search-input"
+										       id="searchInputCity_<%- company.id %>"
+										       placeholder="חפש שם עיר/יישוב">
+										<ul id="dropdownListCities_<%- company.id %>" class="dropdownList dropdownListCities">
+										
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="left-form-field">
+						<h2>
+							פרטי חברה
+						</h2>
+						<div class="form-field-wrapper">
+							<div class="form-field-input">
+								<label for="companyHP_<%- company.id %>">
+									מספר ח.פ.
+								</label>
+								<form autocomplete="off">
+									<input type="text" id="companyHP_<%- company.id %>" value="<%= company.companyHP %>"
+									       required
+									       minlength="9"
+									       maxlength="9"
+									       pattern="\d*">
+								</form>
+							</div>
+							<div class="form-field-input">
+								<label for="companyName_<%- company.id %>">
+									שם חברה
+								</label>
+								<form autocomplete="off">
+									<input required type="text" id="companyName_<%- company.id %>" value="<%= company.companyName %>">
+								</form>
+							</div>
+						</div>
+						<div class="form-field-wrapper-button">
+							<button onclick="submitForm('customer')" id="submitButton_<%- company.id %>">
+							<span>
+								שמירה
+							</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<% }) %>
+		</section>
+		<% } %>
+	
+		<% if (user.userType === "accountant") { %>
+		<section class="personal-details account-details account-details-accountant">
+			<h1>
+				<a href="/account-details">
+					<button>
+						<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"
+						     fill="none">
+							<g filter="url(#filter0_d_203_19937)">
+								<circle cx="50" cy="49" r="32" fill="white"/>
+							</g>
+							<path d="M42 34L59 49L42 64" stroke="#77C2CC" stroke-width="3" stroke-linecap="round"
+							      stroke-linejoin="round"/>
+							<defs>
+								<filter id="filter0_d_203_19937" x="0" y="0" width="100" height="100"
+								        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+									<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+									<feColorMatrix in="SourceAlpha" type="matrix"
+									               values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+									               result="hardAlpha"/>
+									<feOffset dy="1"/>
+									<feGaussianBlur stdDeviation="9"/>
+									<feComposite in2="hardAlpha" operator="out"/>
+									<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+									<feBlend mode="normal" in2="BackgroundImageFix"
+									         result="effect1_dropShadow_203_19937"/>
+									<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_203_19937"
+									         result="shape"/>
+								</filter>
+							</defs>
+						</svg>
+					</button>
+				</a>
+				עדכון פרטים אישיים
+			</h1>
+			
+			<div class="personal-details-form">
+				<ul class="personal-details-form-images">
+					<li>
+						<form action="/upload" method="POST" enctype="multipart/form-data" id="mainPicture_form" class="form_upload">
+							<label for="mainPicture">
+								<img src="/assets/images/loader.gif" alt="loader" class="loader_upload"/>
+								
+								<% if (accountant.mainPicture) { %>
+								<img src="<%= accountant.mainPicture %>" alt="mainPicture" id="mainPicture_img"
+								     class="picture_img">
+								<% } %>
+								<% if (!accountant.mainPicture) { %>
+								<span>
+							<img src="/assets/images/main-picture-base.png" alt="mainPicture">
+						</span>
+								<% } %>
+							</label>
+							
+							<input type="file" id="mainPicture"
+							       class="inputfile"
+							       name="mainPicture"
+							       accept="image/png, image/jpeg">
+						</form>
+					</li>
+					<li>
+						<form action="/upload" method="POST" enctype="multipart/form-data" id="signaturePicture_form" class="form_upload">
+							<label for="signaturePicture">
+								<img src="/assets/images/loader.gif" alt="loader" class="loader_upload"/>
+								
+								<% if (accountant.signaturePicture) { %>
+								<img src="<%= accountant.signaturePicture %>" alt="signaturePicture"
+								     id="signaturePicture_img" class="picture_img">
+								<% } %>
+								<% if (!accountant.signaturePicture) { %>
+								<span>
+							<img src="/assets/images/signature-picture-base.png" alt="signaturePicture">
+						</span>
+								<% } %>
+							</label>
+							
+							<input type="file" id="signaturePicture"
+							       class="inputfile"
+							       name="signaturePicture"
+							       accept="image/png, image/jpeg">
+						</form>
+					</li>
+					<li>
+						<form action="/upload" method="POST" enctype="multipart/form-data" id="logoName_form" class="form_upload">
+							<label for="logoName">
+								<img src="/assets/images/loader.gif" alt="loader" class="loader_upload"/>
+								
+								<% if (accountant.logoName) { %>
+								<img src="<%= accountant.logoName %>" alt="logoName" id="logoName_img"
+								     class="picture_img">
+								<% } %>
+								<% if (!accountant.logoName) { %>
+								<span>
+							<img src="/assets/images/main-picture-base.png" alt="logoName">
+						</span>
+								<% } %>
+							</label>
+							<input type="file" id="logoName"
+							       class="inputfile"
+							       name="logoName"
+							       accept="image/png, image/jpeg">
+						</form>
+					</li>
+				</ul>
+			</div>
+
+			<div class="personal-details-form-fields">
+				<div class="right-form-field">
+					<h2>
+						פרטים אישיים
+					</h2>
+					<div class="form-field-wrapper">
+						<div class="form-field-input">
+							<label for="firstName">
+								שם פרטי
+							</label>
+							<form autocomplete="off">
+								<input required type="text" id="firstName" value="<%= user.firstName %>">
+							</form>
+						</div>
+						<div class="form-field-input">
+							<label for="lastName">
+								שם משפחה
+							</label>
+							<form autocomplete="off">
+								<input required
+								       type="text" id="lastName" value="<%= user.lastName %>">
+							</form>
+						</div>
+					</div>
+					<div class="form-field-wrapper">
+						<div class="form-field-input">
+							<label for="firstName_accountant">
+								שם פרטי
+								רו״ח
+							</label>
+							<form autocomplete="off">
+								<input required type="text" id="firstName_accountant" value="<%= accountant.firstName %>">
+							</form>
+						</div>
+						<div class="form-field-input">
+							<label for="lastName_accountant">
+								שם משפחה
+								רו״ח
+							</label>
+							<form autocomplete="off">
+								<input required type="text" id="lastName_accountant" value="<%= accountant.lastName %>">
+							</form>
+						</div>
+					</div>
+					<div class="form-field-wrapper">
+						<div class="form-field-input">
+							<label for="mobile">
+								נייד
+							</label>
+							<input type="tel" id="mobile" value="0<%= user.mobile %>" disabled>
+						</div>
+						<div class="form-field-input">
+							<label for="mail">
+								אימייל
+							</label>
+							<form autocomplete="off">
+								<input required type="email" id="mail" value="<%= user.mail %>">
+							</form>
+						</div>
+					</div>
+					<div class="form-field-wrapper">
+						<div class="form-field-input">
+							<label for="address">
+								רחוב ומספר בית
+							</label>
+							<form autocomplete="off">
+								<input required type="text" id="address" value="<%= accountant.address %>">
+							</form>
+						</div>
+						<div class="form-field-input">
+							<label for="city_dropdown">
+								עיר/יישוב
+							</label>
+							<div class="search-dropdown">
+								<div class="dropdown-arrow">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+									     fill="none">
+										<path d="M13 6L8 11L3 6" stroke="#666666" stroke-width="1.23077"
+										      stroke-linecap="round"
+										      stroke-linejoin="round"/>
+									</svg>
+								</div>
+								<input type="text" id="city_dropdown"
+								       value="<%= accountant.city ? accountant.city : '' %>">
+								<div class="dropdown-display"
+								     id="dropdownDisplayCity"><%= accountant.city ? accountant.city : 'בחר עיר/יישוב' %>
+								</div>
+								<div class="dropdown-content" id="dropdownContentCity">
+									<input type="text"
+									       class="search-input"
+									       id="searchInputCity"
+									       placeholder="חפש שם עיר/יישוב">
+									<ul id="dropdownListCities" class="dropdownList dropdownListCities">
+									
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="left-form-field">
+					<h2>
+						פרטי חשבון בנק
+						<small>
+							(להעברת כספים)
+						</small>
+					</h2>
+					<div class="form-field-wrapper">
+						<div class="form-field-input">
+							<label for="bank_dropdown">
+								בנק
+							</label>
+							<div class="search-dropdown">
+								<div class="dropdown-arrow">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<path d="M13 6L8 11L3 6" stroke="#666666" stroke-width="1.23077" stroke-linecap="round"
+										      stroke-linejoin="round"/>
+									</svg>
+								</div>
+								<input type="text" id="bank_dropdown">
+								<div class="dropdown-display"
+								     id="dropdownDisplay">בחר בנק
+								</div>
+								<div class="dropdown-content"
+								     id="dropdownContent">
+									<input type="text"
+									       class="search-input"
+									       id="searchInput"
+									       placeholder="חפש שם בנק">
+									<ul id="dropdownList" class="dropdownList">
+									
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="form-field-input">
+							<label for="branch_dropdown">
+								סניף
+							</label>
+							<div class="search-dropdown">
+								<div class="dropdown-arrow">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+										<path d="M13 6L8 11L3 6" stroke="#666666" stroke-width="1.23077" stroke-linecap="round"
+										      stroke-linejoin="round"/>
+									</svg>
+								</div>
+								<input type="text" id="branch_dropdown">
+								<div class="dropdown-display"
+								     id="dropdownDisplay2">בחר סניף
+								</div>
+								<div class="dropdown-content"
+								     id="dropdownContent2">
+									<input type="text"
+									       class="search-input"
+									       id="searchInput2"
+									       placeholder="חפש שם סניף">
+									<ul id="dropdownList2" class="dropdownList">
+									
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-field-wrapper">
+						<div class="form-field-input">
+							<label for="accountNumber">
+								מספר חשבון
+							</label>
+							<input type="text" id="accountNumber" value="<%= accountant.accountNumber %>"
+							       pattern="\d*">
+						</div>
+					</div>
+					<div class="form-field-wrapper-button">
+						<button onclick="submitForm('accountant')" id="submitButton">
+							<span>
+								שמירה
+							</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</section>
+		<% } %>
+	</main>
+	
+	<%- include('footer.html') -%>
+	<%- include('dropdown.html') -%>
+	<%- include('loader.html') -%>
+	<%- include('popup-video.html') -%>
+	
+	<div class="popup-select-company account-details-popup">
+		<div class="bg-popup"></div>
+		<div class="content">
+			<div class="flex-data">
+				<div class="close-popup">
+					<svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" viewBox="0 0 17 18" fill="none">
+						<path d="M1.5 1.76367L15.5 16.2622" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+						<path d="M15.5 1.76367L1.5 16.2622" stroke="#666666" stroke-width="2" stroke-linecap="round"/>
+					</svg>
+				</div>
+				<img src="/assets/images/disconnect.png" alt="disconnect" id="disconnect">
+				
+				<h1 id="textarea-title">
+				
+				</h1>
+				<label for="textarea-review">
+					<span class="product-name"></span>
+				</label>
+				<textarea id="textarea-review" name="textarea-review" rows="10" cols="50"
+				          placeholder="פירוט"></textarea>
+				
+				<div class="btn">
+					<button onclick="setStatusUserProduct()" id="setCompany">
+						<span>
+					אישור
+						</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- Jquery lib -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.min.js"
+        integrity="sha256-sw0iNNXmOJbQhYFuC9OF2kOlD5KQKe1y5lfBn4C9Sjg=" crossorigin="anonymous"></script>
+
+<!-- less lib -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/less"></script> -->
+
+<!-- <script src="/scripts/owl.carousel.min.js"></script> -->
+<!-- <script src="/scripts/categories-items.js"></script> -->
+<% if (typeof script !== 'undefined') { %>
+<script>
+	window.data_bank = <%-JSON.stringify(script) %>
+</script>
+<% } %>
+
+<!-- page specific scripts -->
+<% if (typeof libs !== 'undefined') { %>
+<% for (let lib of libs) { %>
+<script src='/scripts/<%= lib %>.js'></script>
+<% } %>
+<% } %>
+</body>
+</html>
