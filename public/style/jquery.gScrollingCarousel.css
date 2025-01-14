@@ -1,0 +1,110 @@
+.container {
+    margin: 0 auto;
+    max-width: unset;
+}
+
+.g-scrolling-carousel {
+    position: relative;
+    direction: ltr;
+    z-index: 1;
+}
+
+.g-scrolling-carousel .items {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.g-scrolling-carousel .items > * {
+    display: block;
+    user-select: none;
+}
+
+.g-scrolling-carousel .items li {
+    display: inline-block !important;
+}
+
+.jc-right,
+.jc-left {
+    width: 36px;
+    height: 36px;
+    margin-bottom: auto;
+    margin-top: auto;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.jc-right {
+    right: 2px;
+}
+
+.jc-left {
+    left: 2px;
+}
+
+.jc-right:hover,
+.jc-left:hover {
+    opacity: 0.98;
+}
+
+.jc-right:active,
+.jc-left:active {
+
+}
+
+.jc-right svg,
+.jc-left svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    width: 36px;
+    height: 36px;
+
+    path {
+        stroke-width: 2px;
+    }
+}
+
+.jc-right:hover svg path,
+.jc-left:hover svg path {
+    stroke: #F3E7D7;
+    stroke-width: 2px;
+}
+
+.jc-radio-list {
+    position: absolute;
+    bottom: -22px;
+    z-index: 2;
+    list-style-type: none;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    li {
+        width: 19px;
+        height: 19px;
+
+        &.jc-radio-item:not(.active) {
+            cursor: pointer;
+        }
+
+        &:not(:last-child) {
+            margin-right: 12px;
+        }
+
+        svg {
+            width: 19px;
+            height: 19px;
+        }
+    }
+}

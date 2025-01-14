@@ -1,0 +1,731 @@
+@import "fonts";
+
+@media only screen and (max-width: 1024px) and (min-width: 431px) {
+  .font-size(@size, @isIpad) {
+    & when (@isIpad = true) {
+      font-size: unit((@size/10.24), vw);
+    }
+    & when (@isIpad = false) {
+      font-size: unit(@size, px);
+    }
+  }
+
+  .iPadDefs(@c1:false) {
+    @iPad: @c1;
+  }
+
+  .tablet-hide {
+    display: none !important;
+  }
+
+  .themeProperties() {
+    header {
+      height: 64px;
+      padding: 8px 34px;
+
+      nav ul li a {
+        font-size: 14px;
+        .font-size(14, @iPad);
+
+        line-height: 16px;
+      }
+
+      section {
+        #logout {
+          button ins, p {
+            font-size: 14px;
+            .font-size(14, @iPad);
+
+          }
+        }
+
+        #lang span {
+          font-size: 14px;
+          .font-size(14, @iPad);
+
+        }
+
+        #login {
+          display: flex;
+          align-items: center;
+          border-radius: 30.833px;
+          background: var(--Blue, #77C2CC);
+          padding: 7.5px;
+          margin-left: 12px;
+
+          span.icon-avatar-1 {
+            font-size: 20px;
+            .font-size(20, @iPad);
+
+            margin-left: 0;
+          }
+
+          span.text {
+            display: none;
+          }
+        }
+      }
+
+
+    }
+
+    .banner-name-sign {
+      height: 364px;
+      background: url(../assets/images/left-section-1.svg) left bottom no-repeat;
+      background-color: #FFFEFE;
+      background-size: contain;
+      display: flex;
+      padding: 0 66px;
+
+      .titles {
+        width: 410px;
+
+        h1 {
+          font-size: 70px;
+          .font-size(70, @iPad);
+
+          line-height: 84px; /* 120% */
+          letter-spacing: -2.1px;
+        }
+
+        h2 {
+          font-size: 58px;
+          .font-size(58, @iPad);
+
+          line-height: 48px; /* 82.759% */
+          letter-spacing: 1.16px;
+        }
+
+        .signature-instagram {
+          margin-top: 16px;
+          width: 409px;
+
+          .signature {
+            display: flex;
+            padding: 10px 16px;
+            width: 357px;
+            height: 44px;
+            margin-left: 8px;
+
+            p {
+              font-size: 20px;
+              .font-size(20, @iPad);
+
+              line-height: 24px;
+            }
+
+            div {
+              width: 57px;
+              height: 11.875px;
+
+              img {
+                object-fit: fill;
+                width: 57px;
+                height: 11.875px;
+              }
+            }
+          }
+
+          .instagram-button {
+            width: 44px;
+            height: 44px;
+            background-size: contain;
+
+            &:hover {
+              background-size: contain;
+            }
+          }
+        }
+      }
+
+      .photo img {
+        width: 388px;
+        height: 330px;
+      }
+    }
+
+    .map-banner-2 {
+      height: auto;
+      display: block;
+      padding: 32px 0;
+      background: #f7f6f4;
+
+      .marker {
+        background: #dbbb8833;
+        display: flex;
+        align-items: center;
+        width: 992px;
+        padding: 40px 69px 40px 64px;
+        border-radius: 120px 0px 0px 120px;
+        margin-bottom: 30px;
+
+        h3 {
+          font-size: 58px;
+          .font-size(58, @iPad);
+
+          line-height: 48px; /* 82.759% */
+          letter-spacing: 1.16px;
+        }
+
+        p {
+          width: 495px;
+          font-size: 20px;
+          .font-size(20, @iPad);
+
+          line-height: 29px; /* 145% */
+          letter-spacing: -0.2px;
+        }
+      }
+
+      .content-text {
+        background: url(../assets/images/map-banner-2-text-tablet.png) right 0px top 26px no-repeat, url(../assets/images/map-banner-2-map-tablet.png) right 356px top 50px no-repeat;
+        width: auto;
+        min-width: 418px;
+        margin-right: 67px;
+
+        button {
+          margin-right: 0px;
+        }
+
+        h2 {
+          font-size: 102.317px;
+          .font-size(102.317, @iPad);
+
+          line-height: 90.806px; /* 88.75% */
+        }
+
+        h1 {
+          font-size: 433.074px;
+          .font-size(433.074, @iPad);
+
+          line-height: 288.716px; /* 66.667% */
+        }
+
+        p {
+          width: 511px;
+          font-size: 20px;
+          .font-size(20, @iPad);
+
+          line-height: 29px; /* 145% */
+          letter-spacing: -0.2px;
+          margin-top: 16px;
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+    .certified-banner {
+      height: auto;
+      background-size: 41%;
+      display: block;
+      padding-bottom: 55px;
+
+
+      #bee-certified {
+        margin-top: 22px;
+        margin-right: 16px;
+        width: 316px;
+        height: 231px;
+      }
+
+      .certified-banner-top {
+        display: flex;
+        align-items: center;
+      }
+
+      aside {
+        margin-right: 35px;
+        margin-top: 0;
+        width: 544px;
+      }
+
+      .certified-banner-list {
+        margin-top: 34px;
+        margin-right: 100px;
+
+        ul li {
+          padding: 19px 31px 23px 19px;
+          width: 258px;
+          height: 179px;
+        }
+
+        ul.bottom-list {
+          margin-top: 57px;
+          margin-right: 0;
+        }
+      }
+
+
+      aside {
+        h1 {
+          .font-size(80, @iPad);
+        }
+
+        p {
+          .font-size(20, @iPad);
+        }
+      }
+
+      .certified-banner-list {
+
+        ul {
+
+          li {
+            h1 {
+              .font-size(109, @iPad);
+            }
+
+            .text {
+              h3 {
+                .font-size(26, @iPad);
+              }
+
+              p {
+                .font-size(20, @iPad);
+              }
+            }
+          }
+        }
+      }
+
+
+    }
+
+
+    .experts-banner {
+      zoom: 0.8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .content-text {
+        margin: 0 auto;
+
+        h1 {
+          text-align: center;
+        }
+
+        p {
+          text-align: center;
+          width: 522px;
+          margin: 16px auto;
+        }
+      }
+
+      .experts {
+        margin-top: 0;
+        margin-right: 0;
+      }
+    }
+
+    .products-banner {
+      zoom: 0.8;
+    }
+
+    .contact-banner {
+      zoom: 0.9;
+      background: url(../assets/images/contact-banner-1.svg) bottom right -50px no-repeat, url(../assets/images/contact-banner-3.svg) bottom left no-repeat, url(../assets/images/contact-banner-2.svg) bottom 71.7px left 132px no-repeat, url(../assets/images/contact-banner-4.svg) top 85px left 421px no-repeat;
+
+      h1 {
+        margin-right: 75px;
+        padding-top: 95px;
+      }
+
+      .form {
+        margin-top: 198px;
+        margin-right: 44px;
+      }
+    }
+
+    .top-five-banner {
+      zoom: 0.8;
+    }
+
+    .stories {
+
+
+      .owl-prev {
+        right: 100px;
+      }
+
+      .owl-next {
+        left: 100px;
+      }
+
+      .owl-stage-outer:before {
+        width: 207px;
+      }
+
+      .owl-stage-outer:after {
+        width: 207px;
+      }
+    }
+
+    footer {
+      height: 400px;
+      padding: 50px 60px;
+    }
+
+    main {
+      margin-top: 65px;
+    }
+
+    .nav-links-titles {
+      margin: 25px 35px;
+    }
+    #account-details {
+      min-height: 70vh;
+    }
+    .account-details {
+      margin: 25px 35px;
+
+      .username-info {
+        p, strong {
+          line-height: 30px; /* 115.385% */
+        }
+      }
+
+      .table {
+        margin-bottom: 50px;
+
+        .header-row, .body-row {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          align-self: stretch;
+
+          & > div {
+            &:nth-child(1) {
+              width: 241px;
+              padding: 24px;
+            }
+
+            &:nth-child(2) {
+              width: 219px;
+              padding: 24px;
+            }
+
+            &:nth-child(4) {
+              width: 133px;
+              padding: 24px;
+            }
+
+            &:nth-child(5) {
+              width: 134px;
+              padding: 24px 24px 24px 16px;
+            }
+
+            &:nth-child(7) {
+              display: flex;
+              padding-left: 16px;
+              justify-content: flex-end;
+              align-items: center;
+              align-self: stretch;
+              flex: 1;
+              width: 100%;
+            }
+          }
+        }
+
+      }
+
+      &.account-details-accountant {
+        .table {
+          .header-row, .body-row {
+            & > div {
+              padding: 24px;
+
+              &:nth-child(1) {
+                width: 235px;
+              }
+
+              &:nth-child(2) {
+                width: 175px;
+              }
+
+              &:nth-child(4) {
+                flex: 1;
+              }
+
+              &:nth-child(5) {
+                flex: 1;
+              }
+
+              &:nth-child(7) {
+                flex: 1;
+              }
+
+              &:nth-child(8) {
+                flex: 1;
+              }
+            }
+          }
+
+        }
+      }
+    }
+    .categories {
+      width: 951px;
+
+      .filter-list li {
+        padding: 6px 12px 6px 16px;
+
+        .icon {
+          width: 31.2px;
+          height: 31.2px;
+          padding: 2.229px;
+          margin-left: 9px;
+        }
+
+        p {
+          font-size: 16px;
+          .font-size(16, @iPad);
+
+          line-height: 23px;
+        }
+      }
+
+      .categories-list {
+        ul li {
+          width: 301px;
+          height: 490px;
+          position: relative;
+
+          .content {
+            width: 301px;
+            height: 490px;
+            padding: 16px;
+
+            .icon-top {
+              width: 269px;
+              height: 191px;
+            }
+          }
+
+
+        }
+      }
+    }
+
+    .packages-section .packages-list {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      li.item {
+        margin-bottom: 40px;
+        margin-left: 0 !important;
+      }
+    }
+
+    .categories-top-banner {
+      height: 550px;
+      background: url(../assets/images/productBannerBgTablet.svg) center left no-repeat, #E5F4F5;
+      overflow: hidden;
+      position: relative;
+      background-size: cover;
+
+      .content {
+        display: flex;
+        margin-right: 30px;
+        margin-top: 50px;
+        flex-wrap: wrap;
+
+        &.video-content.active {
+          .btn-categories-top-banner {
+            margin-top: 0;
+          }
+
+          .titles {
+            width: auto;
+
+            h1 {
+              .font-size(69.53, @iPad);
+              line-height: 59.174px;
+            }
+
+            h3 {
+              display: none;
+            }
+          }
+
+          #about {
+            display: none;
+          }
+        }
+      }
+
+      #video {
+        height: 550px;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        object-fit: cover;
+        object-position: 15% 50%;
+      }
+
+      .img-expert-left {
+        position: absolute;
+        width: 512px;
+        height: 550px;
+        left: 17px;
+        top: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        .title-expert {
+          border-radius: 13px;
+          border: 1px solid var(--Grey-Text, #949494);
+          background: rgba(66, 66, 66, 0.2);
+          backdrop-filter: blur(2px);
+          display: inline-flex;
+          padding: 18px 26px;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 39px;
+        }
+      }
+    }
+
+    .info-categories {
+      .list li {
+        min-height: 458px;
+        width: 290px;
+
+        .title {
+          font-size: 42px;
+          .font-size(42, @iPad);
+
+          line-height: 36px;
+          letter-spacing: 0.42px;
+        }
+
+        .text {
+          width: 252px;
+        }
+      }
+    }
+
+
+    .main-banner-template {
+      height: 364px;
+      background: url(../assets/images/main-banner-template-left-tablet.svg) bottom left no-repeat, #FFFEFE;
+      overflow: hidden;
+
+      .content {
+        margin-top: 86px;
+        margin-right: 69px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+
+        .right {
+          width: 393px;
+
+          h1.title {
+            color: var(--Gold-02, #D3BFA5);
+            text-align: right;
+            font-size: 70px;
+            .font-size(70, @iPad);
+
+            line-height: 84px; /* 100% */
+            letter-spacing: -2.1px;
+            .open-sans-700();
+            margin-bottom: 0;
+          }
+
+          h1.sub-title {
+            color: var(--Dark-Grey, #666);
+            font-size: 58px;
+            .font-size(58, @iPad);
+
+            line-height: 48px; /* 82.759% */
+            letter-spacing: 1.16px;
+            .karantina-regular();
+          }
+        }
+
+        .border {
+          width: 4px;
+          height: 157px;
+          margin: 0 10px 0 35px;
+          background: var(--Gold-02, #D3BFA5);
+        }
+
+        .left {
+          width: 210px;
+
+          p {
+            color: var(--Dark-Grey, #666);
+            text-align: right;
+            font-size: 26px;
+            .font-size(26, @iPad);
+
+            line-height: 30px; /* 115.385% */
+            .open-sans-700();
+            margin-bottom: 16px;
+          }
+
+          a {
+            margin-bottom: 43px;
+            display: block;
+
+            button {
+              border-radius: 37px;
+              background: var(--Button, #D38C38);
+              height: 48px;
+              padding: 12px 22px;
+              color: var(--White, #FFF);
+              text-align: center;
+              font-size: 18px;
+              .font-size(18, @iPad);
+
+              line-height: 24px; /* 133.333% */
+              .open-sans-400();
+            }
+          }
+
+        }
+
+      }
+    }
+
+    .popup-video .content {
+      width: 980px;
+      height: 538px;
+
+      .flex-video .text.left-content {
+        width: 475px;
+      }
+    }
+
+    .personal-details-form-fields {
+      flex-direction: column;
+
+      .right-form-field {
+        margin-left: 0;
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  //1024/100=10.24
+  //58/10.24=5.6640625
+  body:not(.iPad) {
+    .iPadDefs(false);
+    .themeProperties();
+  }
+
+  body.iPad {
+    .iPadDefs(true);
+    .themeProperties();
+  }
+}
